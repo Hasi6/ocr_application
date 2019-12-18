@@ -8,7 +8,7 @@ const cuid = require("cuid");
 const router: Router = Router();
 const findUser: FindUser = new FindUser();
 
-router.post("/api/resetPassword", async (req, res) => {
+router.post("/api/resetPassword", async (req: Request, res: Response) => {
   let { token, password } = req.body;
 
   try {

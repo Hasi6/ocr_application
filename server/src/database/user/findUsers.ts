@@ -26,7 +26,7 @@ class FindUser {
         }
     }
 
-    // FIND USER BY TOKEN
+    // FIND USER BY TOKEN AND RESET PASSWORD
     async findUserByTokenAndResetPassword(token: String, password: any) {
         try {
             const user = await Users.findOne({ token })
@@ -42,6 +42,24 @@ class FindUser {
                 await user.save();
                 return true;
             }
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    // FIND USER BY TOKEN AND VERIFY ACCOUNT
+    async findUserByTokenAndVerifyAccount(token: String) {
+        try {
+            const user = await Users.findOne({ token })
+            if (!user) {
+                return false
+            }
+            const newToken = `${user.email}-${uuidv4()}-${Date.now()}`
+            user.verifyAccount = true;
+            user.token = newToken;
+            await user.save();
+            return true
+
         } catch (err) {
             console.error(err.message)
         }
