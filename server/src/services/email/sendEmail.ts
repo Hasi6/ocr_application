@@ -16,8 +16,8 @@ class Email {
             subject: "Welcome",
             html: output,
 
-            onError: (e: any) => console.log(e),
-            onSuccess: (i: any) => { return "Success" }
+            onError: (e: any) => false,
+            onSuccess: (i: any) => true
         });
     }
 

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import databaseData from '../../config/default';
 import nodeoutlook from "nodejs-nodemailer-outlook";
 import FindUser from '../../database/user/findUserByEmailDB';
+import ForgetPassword from '../../services/email/forgetPasswordSendEmail';
 
 const Users = mongoose.model("users");
 const emailPassword = databaseData;
@@ -19,19 +20,23 @@ router.post("/api/forgetPassword", async (req, res) => {
     if (!user) {
       return res.json({ msg: false });
     } else {
-      //   ******************************************************************************************
 
       // SEND EMAIL
       const output = `<ul>
       <li>User Token = Welcome ${user.username}</li>
       <p><a href='http://localhost:3000/resetPassword/${user.token}'>click here</a> for verify your account  </p>
-  </ul>`;
+      </ul>`;
 
+      const forgetPassword: ForgetPassword = new ForgetPassword();
 
+      const response = forgetPassword.forgetPasswordSendEmail(email, output);
 
-      // *******************************************************************************************
-
+      if (!response) {
+        return res.json({ msg: false });
+      }
       return res.json({ msg: true });
+
+
     }
   } catch (err) {
     console.error(err.message);
