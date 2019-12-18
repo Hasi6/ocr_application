@@ -7,6 +7,10 @@ import Login from './routes/auth/Login';
 
 const app = express();
 
+// MODELS
+import './models/Users';
+
+
 // DATABASE CONNECTION
 connectDB();
 
