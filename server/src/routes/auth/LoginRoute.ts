@@ -1,9 +1,7 @@
 import { Router, Response, Request, NextFunction } from 'express';
 import bcrypt from "bcryptjs";
 import FindUser from '../../database/user/findUserByEmailDB';
-const mongoose = require("mongoose");
-const User = mongoose.model("users");
-const passport = require("passport");
+import passport from "passport";
 
 const router: Router = Router();
 

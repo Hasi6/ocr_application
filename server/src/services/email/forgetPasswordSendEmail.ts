@@ -1,14 +1,14 @@
-import Email from './sendEmail';
-class ForgetPassword {
+import Email from "./sendEmail";
+
+class ForgetPassword extends Email {
 
 
-    sendEmail: Email = new Email();
 
     // FORGET PASSWORD SEND EMAIL
     async forgetPasswordSendEmail(email: String, output: String) {
         try {
-            const forgetPasswordEmailSent = await this.sendEmail.sendEmail(email, output);
-            return forgetPasswordEmailSent;
+            const res = await this.sendEmail(email, output);
+            return res;
         } catch (err) {
             console.error(err.message)
         }
