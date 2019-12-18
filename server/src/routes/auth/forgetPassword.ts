@@ -1,15 +1,10 @@
 import { Router, Request, Response } from 'express';
-import mongoose from "mongoose";
-import databaseData from '../../config/default';
-import nodeoutlook from "nodejs-nodemailer-outlook";
-import FindUser from '../../database/user/findUserByEmailDB';
+import FindUser from '../../database/user/findUsers';
 import ForgetPassword from '../../services/email/forgetPasswordSendEmail';
 
-const Users = mongoose.model("users");
-const emailPassword = databaseData;
 const router: Router = Router();
 
-router.post("/api/forgetPassword", async (req, res) => {
+router.post("/api/forgetPassword", async (req: Request, res: Response) => {
   const { email } = req.body;
 
   const findUser = new FindUser();

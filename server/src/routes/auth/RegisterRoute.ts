@@ -1,11 +1,15 @@
-const bcrypt = require("bcryptjs");
+import bcrypt from "bcryptjs";
 import uuidv4 from 'uuid/v4';
-import FindUser from '../../database/user/findUserByEmailDB';
+import FindUser from '../../database/user/findUsers';
 import { Router, Request, Response } from 'express';
 import VerifyAccount from '../../services/email/verifyUserAccount';
+import SaveUserDB from '../../database/user/saveUserToDB';
+
+
 
 const router: Router = Router();
 const findUser: FindUser = new FindUser();
+const saveUserDB: SaveUserDB = new SaveUserDB();
 
 router.post("/api/register", async (req: Request, res: Response) => {
   const { username, email, password, image } = req.body;
@@ -21,19 +25,15 @@ router.post("/api/register", async (req: Request, res: Response) => {
 
     const token = `${email}-${uuidv4()}`;
 
-    const newUser = new User({
+    const newUser = {
       username,
       email,
       password,
       image,
       token
-    });
+    };
 
-    // encrypt the password
-    const salt = await bcrypt.genSalt(10);
-    newUser.password = await bcrypt.hash(password, salt);
-
-    await newUser.save();
+    await saveUserDB.saveUser(newUser);
 
     // SEND EMAIL
     const output = `<ul>
