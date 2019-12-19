@@ -1,4 +1,4 @@
-import { uuidv4 } from 'uuid/v4';
+import uuidv4 from 'uuid/v4';
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 

@@ -1,14 +1,27 @@
 import express from 'express';
 import connectDB from './config/db';
-
-// ROUTES
-import Login from './routes/auth/Login';
-
-
-const app = express();
+import cookieSession from 'cookie-session';
 
 // MODELS
 import './models/Users';
+
+// ROUTES
+import LoginRoute from './routes/auth/LoginRoute';
+import RegisterRoute from './routes/auth/RegisterRoute';
+import CheckAuthState from './routes/auth/AuthRoutes';
+import databaseData from './config/default';
+
+
+const app = express();
+const { cookieSecret }: any = databaseData;
+
+// start Session
+app.use(
+    cookieSession({
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        keys: [cookieSecret]
+    })
+);
 
 
 // DATABASE CONNECTION
@@ -19,6 +32,9 @@ app.use(
     express.json()
 );
 
+app.use(express.static("public"));
+
+
 const PORT: any = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
@@ -28,4 +44,6 @@ app.listen(PORT, () => {
 // ROUTES
 
 // GET
-app.use(Login);
+app.use(LoginRoute);
+app.use(RegisterRoute);
+app.use(CheckAuthState);

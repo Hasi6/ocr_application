@@ -1,4 +1,3 @@
-import bcrypt from "bcryptjs";
 import uuidv4 from 'uuid/v4';
 import FindUser from '../../database/user/findUsers';
 import { Router, Request, Response } from 'express';

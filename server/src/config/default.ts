@@ -6,15 +6,15 @@ if (process.env.NODE_ENV === 'production') {
         googleClientID: "384211523476-o1uhkv13gp9p52hfej6pmhrj1tu93l1e.apps.googleusercontent.com",
         googleClientSecret: "EXokeWOrg744NQiHgRS-PWTp",
         cookieSecret: "mysecret",
-        emailPassword: "Freedom6@"
+        emailPassword: "MSIGL638rc"
     }
 } else {
     databaseData = {
-        mongoURI: "mongodb+srv://hasitha:Freedom6@cluster0-zcrw6.gcp.mongodb.net/test?retryWrites=true&w=majority",
+        mongoURI: "mongodb://localhost:27017/ocr-app",
         googleClientID: "384211523476-o1uhkv13gp9p52hfej6pmhrj1tu93l1e.apps.googleusercontent.com",
         googleClientSecret: "EXokeWOrg744NQiHgRS-PWTp",
         cookieSecret: "mysecret",
-        emailPassword: "Freedom6@"
+        emailPassword: "MSIGL638rc"
     }
 }
 

@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 const checkAuthState = async (req: Request, res: Response, next: NextFunction) => {
 
