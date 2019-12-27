@@ -4,11 +4,15 @@ import cookieSession from 'cookie-session';
 
 // MODELS
 import './models/Users';
+import './models/Images';
 
 // ROUTES
 import LoginRoute from './routes/auth/LoginRoute';
 import RegisterRoute from './routes/auth/RegisterRoute';
 import CheckAuthState from './routes/auth/AuthRoutes';
+import AddImage from './routes/tesseract/addImage';
+
+
 import databaseData from './config/default';
 
 
@@ -47,3 +51,6 @@ app.listen(PORT, () => {
 app.use(LoginRoute);
 app.use(RegisterRoute);
 app.use(CheckAuthState);
+
+// POST
+app.use(AddImage)
