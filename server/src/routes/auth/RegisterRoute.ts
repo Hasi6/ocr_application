@@ -41,7 +41,7 @@ router.post("/api/register", async (req: Request, res: Response) => {
                   </ul>`;
     const response = await verifyAccount.verifyAccountSendEmail(email, output)
 
-    return res.json(response);
+    return res.json({ msg: "user registered successfully" });
   } catch (err) {
     console.error(err.message);
   }
