@@ -4,7 +4,6 @@ import fs from "fs";
 import path from 'path'
 import mongoose from 'mongoose';
 import SaveImage from '../../database/tessaract/SaveImage';
-const Images = mongoose.model('images')
 
 
 const worker: TesseractWorker = new TesseractWorker();

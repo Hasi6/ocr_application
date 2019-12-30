@@ -13,8 +13,12 @@ import CheckAuthState from './routes/auth/AuthRoutes';
 import AddImage from './routes/tesseract/addImage';
 
 
-import databaseData from './config/default';
 
+
+import databaseData from './config/default';
+import passport from 'passport';
+
+import passportService from './services/passport/passport';
 
 const app = express();
 const { cookieSecret }: any = databaseData;
@@ -26,6 +30,13 @@ app.use(
         keys: [cookieSecret]
     })
 );
+
+// Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// passport
+passportService(passport);
 
 
 // DATABASE CONNECTION
