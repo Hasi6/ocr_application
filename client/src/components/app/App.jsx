@@ -1,0 +1,36 @@
+import React from "react";
+import { withRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import configureStore from "../../redux/store/configureStore";
+import HomePage from "./HomePage/HomePage";
+import NavBar from "./NavBar/NavBar";
+
+// sementic ui
+import "semantic-ui-css/semantic.min.css";
+import Login from "./Auth/Login/Login";
+import Messages from "./Messages/Messages";
+import Register from "./Auth/Register/Register";
+import { checkUsersAuthState } from "../../redux/actions/auth/auth";
+
+// REDUX STAFF
+const store = configureStore;
+
+// CHECK USER LOGGED IN OR NOT
+store.dispatch(checkUsersAuthState())
+
+
+const App = ({location}) => {
+  return (
+    <Provider store={store}>
+    <NavBar />
+    <Switch key={location.key}>
+    <Route path="/" component={HomePage} exact />
+    <Route path="/login" component={Login} exact />
+    <Route path="/register" component={Register} exact />
+    <Route path="/messages" component={Messages} exact />
+  </Switch>
+    </Provider>
+  );
+};
+
+export default withRouter(App);
