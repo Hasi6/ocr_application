@@ -22,11 +22,12 @@ import {
   Col,
   Alert
 } from "reactstrap";
+import Axios from "axios";
 
-const Register = ({ registerUser, auth, history }) => {
-  if (auth) {
-    history.push("/");
-  }
+const Register = ({history}) => {
+  // if (auth) {
+  //   history.push("/");
+  // }
 
   // DECLARE STATE VARIABLES
   const [username, setUsername] = useState("");
@@ -43,23 +44,8 @@ const Register = ({ registerUser, auth, history }) => {
     name(value);
   };
 
-  // REGISTER BUTTON DISABLE FUNCTION
-  const disabled = () => {
-    if (
-      email === "" ||
-      password === "" ||
-      loading ||
-      username === "" ||
-      confirmPassword === ""
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   // REGISTER FUNCTION
-  const onSubmit = e => {
+  const onSubmit = async(e) => {
     e.preventDefault();
     setEmailError(null);
     setPasswordError(null);
@@ -73,7 +59,16 @@ const Register = ({ registerUser, auth, history }) => {
         email,
         password
       };
-      registerUser(body, setLoading, setError, setEmailError);
+      const header={
+        headers:{
+          "Content-type":"application/json"
+        }
+      };
+      const res =await Axios.post("http://localhost:5000/api/register",body,header);
+      console.log(res);
+      if(res.status===200){
+        history.push('/')
+      }
     }
   };
 
@@ -82,22 +77,9 @@ const Register = ({ registerUser, auth, history }) => {
       <Row className="justify-content-center">
         <Col lg="5">
           <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-white pb-5">
-              <div className="text-muted text-center mb-3">
-                <small>Sign in with</small>
-              </div>
-              <div className="btn-wrapper text-center">
-                <Button color="facebook">
-                  <Icon name="facebook" /> Facebook
-                </Button>
-                <Button color="google plus">
-                  <Icon name="google" /> Google
-                </Button>
-              </div>
-            </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Sign in with credentials</small>
               </div>
               <Form onSubmit={e => onSubmit(e)} role="form">
                 <FormGroup className="mb-3">
@@ -182,7 +164,6 @@ const Register = ({ registerUser, auth, history }) => {
                     color="purple"
                     type="submit"
                     loading={loading}
-                    disabled={disabled()}
                   >
                     Sign in
                   </Button>
@@ -219,10 +200,4 @@ const Register = ({ registerUser, auth, history }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth
-  };
-};
-
-export default connect(mapStateToProps, { registerUser })(Register);
+export default Register;

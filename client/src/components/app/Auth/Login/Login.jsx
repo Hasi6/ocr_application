@@ -21,11 +21,12 @@ import {
 
 import "../auth.css";
 import { loginUser } from "../../../../redux/actions/auth/auth";
+import Axios from "axios";
 
-const Login = ({ loginUser, auth, history }) => {
-  if (auth) {
-    history.push("/");
-  }
+const Login = ({history}) => {
+  // if (auth) {
+  //   history.push("/");
+  // }
 
   // DECLARE STATE VARIABLES
   const [email, setEmail] = useState("");
@@ -40,17 +41,9 @@ const Login = ({ loginUser, auth, history }) => {
     name(value);
   };
 
-  // LOGIN BUTTON DISABLE FUNCTION
-  const disabled = () => {
-    if (email === "" || password === "" || loading) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   // LOGIN FUNCTION
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setEmailError(false);
@@ -60,7 +53,16 @@ const Login = ({ loginUser, auth, history }) => {
       email,
       password
     };
-    loginUser(body, setLoading, setError, setEmailError, setPasswordError);
+    const header={
+      headers:{
+        "Content-type":"application/json"
+      }
+    };
+    const res =await Axios.post("http://localhost:5000/api/login",body,header);
+    console.log(res);
+    if(res.status===200){
+      history.push('/');
+    }
   };
 
   return (
@@ -68,22 +70,9 @@ const Login = ({ loginUser, auth, history }) => {
       <Row className="justify-content-center">
         <Col lg="5">
           <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-white pb-5">
-              <div className="text-muted text-center mb-3">
-                <small>Sign in with</small>
-              </div>
-              <div className="btn-wrapper text-center">
-                <Button color="facebook">
-                  <Icon name="facebook" /> Facebook
-                </Button>
-                <Button color="google plus">
-                  <Icon name="google" /> Google
-                </Button>
-              </div>
-            </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Sign in with credentials</small>
               </div>
               <Form onSubmit={e => onSubmit(e)} role="form">
                 <FormGroup className="mb-3">
@@ -131,7 +120,6 @@ const Login = ({ loginUser, auth, history }) => {
                     color="purple"
                     type="submit"
                     loading={loading}
-                    disabled={disabled()}
                   >
                     Sign in
                   </Button>
@@ -168,10 +156,4 @@ const Login = ({ loginUser, auth, history }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth
-  };
-};
-
-export default connect(mapStateToProps, { loginUser })(Login);
+export default Login;

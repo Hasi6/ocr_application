@@ -24,7 +24,7 @@ router.post('/api/addImage', async (req: Request, res: Response, next: NextFunct
         console.log(result)
     } catch (err) {
         console.error(err.message)
-    }
+    }   
 })
 
 export default router;
