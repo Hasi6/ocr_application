@@ -24,10 +24,7 @@ import {
 } from "reactstrap";
 import Axios from "axios";
 
-const Register = ({history}) => {
-  // if (auth) {
-  //   history.push("/");
-  // }
+const Register = ({history,async, auth, registerUser}) => {
 
   // DECLARE STATE VARIABLES
   const [username, setUsername] = useState("");
@@ -44,11 +41,11 @@ const Register = ({history}) => {
     name(value);
   };
 
+
+
   // REGISTER FUNCTION
   const onSubmit = async(e) => {
     e.preventDefault();
-    setEmailError(null);
-    setPasswordError(null);
     if (password !== confirmPassword) {
       setPasswordError(true);
       setError("Passwords Did not Matched");
@@ -59,18 +56,12 @@ const Register = ({history}) => {
         email,
         password
       };
-      const header={
-        headers:{
-          "Content-type":"application/json"
-        }
-      };
-      const res =await Axios.post("http://localhost:5000/api/register",body,header);
-      console.log(res);
-      if(res.status===200){
-        history.push('/')
-      }
+      registerUser(body,setLoading, setError, setEmailError,history);
+
     }
   };
+
+  
 
   return (
     <Container className="pt-lg-md">
@@ -200,4 +191,10 @@ const Register = ({history}) => {
   );
 };
 
-export default Register;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    async: state.async
+  };
+};
+export default connect(mapStateToProps, { registerUser })(Register);

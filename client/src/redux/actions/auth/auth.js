@@ -35,7 +35,8 @@ export const registerUser = (
   body,
   setLoading,
   setError,
-  setEmailError
+  setEmailError,
+  history
 ) => async dispatch => {
   body.image = `https://gravatar.com/avatar/${md5(body.email)}?d=identicon`;
   try {
@@ -49,6 +50,7 @@ export const registerUser = (
       });
     }
     setLoading(false);
+    history.push("/login");
   } catch (err) {
     console.error(err.message);
     setLoading(false);

@@ -23,10 +23,10 @@ import "../auth.css";
 import { loginUser } from "../../../../redux/actions/auth/auth";
 import Axios from "axios";
 
-const Login = ({history}) => {
-  // if (auth) {
-  //   history.push("/");
-  // }
+const Login = ({async, auth, loginUser, history}) => {
+  if (auth) {
+    history.push("/");
+  }
 
   // DECLARE STATE VARIABLES
   const [email, setEmail] = useState("");
@@ -45,24 +45,17 @@ const Login = ({history}) => {
   // LOGIN FUNCTION
   const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setEmailError(false);
-    setError(null);
-    setPasswordError(false);
+    // setLoading(true);
+    // setEmailError(false);
+    // setError(null);
+    // setPasswordError(false);
     const body = {
       email,
       password
     };
-    const header={
-      headers:{
-        "Content-type":"application/json"
-      }
-    };
-    const res =await Axios.post("http://localhost:5000/api/login",body,header);
-    console.log(res);
-    if(res.status===200){
-      history.push('/');
-    }
+    
+    loginUser(body,setLoading, setError, setEmailError, setPasswordError);
+
   };
 
   return (
@@ -156,4 +149,12 @@ const Login = ({history}) => {
   );
 };
 
-export default Login;
+// export default Login;
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    async: state.async
+  };
+};
+export default connect(mapStateToProps, { loginUser })(Login);
