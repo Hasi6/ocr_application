@@ -24,7 +24,7 @@ const UsersSchema = new Schema({
   },
   verifyAccount: {
     type: Boolean,
-    default: true
+    default: false
   },
   addedDate: {
     type: Date,
