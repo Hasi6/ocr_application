@@ -20,7 +20,7 @@ router.post("/api/sendToken", async (req, res) => {
 
     const output = `<ul>
                       <li>User Token = Welcome ${user.username}</li>
-                      <p><a href='http://localhost:8080/verify/${user.token}'>click here</a> for verify your account  </p>
+                      <p><a href='http://localhost:3000/verify/${user.token}'>click here</a> for verify your account  </p>
                   </ul>`;
 
     await verifyAccount.verifyAccountSendEmail(email, output)

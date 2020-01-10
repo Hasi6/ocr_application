@@ -9,6 +9,7 @@ import "semantic-ui-css/semantic.min.css";
 import Login from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
 import { checkUsersAuthState } from "../../redux/actions/auth/auth";
+import Verify from "./Auth/Register/verify";
 
 // REDUX STAFF
 const store = configureStore;
@@ -24,6 +25,7 @@ const App = ({location}) => {
     <Route path="/" component={HomePage} exact />
     <Route path="/login" component={Login} exact />
     <Route path="/register" component={Register} exact />
+    <Route path="/verify/:id" component={Verify} exact />
   </Switch>
     </Provider>
   );
