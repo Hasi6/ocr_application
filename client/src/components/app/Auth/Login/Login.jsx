@@ -21,8 +21,9 @@ import {
 
 import "../auth.css";
 import { loginUser } from "../../../../redux/actions/auth/auth";
+import Axios from "axios";
 
-const Login = ({ loginUser, auth, history }) => {
+const Login = ({async, auth, loginUser, history}) => {
   if (auth) {
     history.push("/");
   }
@@ -40,27 +41,21 @@ const Login = ({ loginUser, auth, history }) => {
     name(value);
   };
 
-  // LOGIN BUTTON DISABLE FUNCTION
-  const disabled = () => {
-    if (email === "" || password === "" || loading) {
-      return true;
-    } else {
-      return false;
-    }
-  };
 
   // LOGIN FUNCTION
-  const onSubmit = e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setEmailError(false);
-    setError(null);
-    setPasswordError(false);
+    // setLoading(true);
+    // setEmailError(false);
+    // setError(null);
+    // setPasswordError(false);
     const body = {
       email,
       password
     };
-    loginUser(body, setLoading, setError, setEmailError, setPasswordError);
+    
+    loginUser(body,setLoading, setError, setEmailError, setPasswordError);
+
   };
 
   return (
@@ -68,22 +63,9 @@ const Login = ({ loginUser, auth, history }) => {
       <Row className="justify-content-center">
         <Col lg="5">
           <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-white pb-5">
-              <div className="text-muted text-center mb-3">
-                <small>Sign in with</small>
-              </div>
-              <div className="btn-wrapper text-center">
-                <Button color="facebook">
-                  <Icon name="facebook" /> Facebook
-                </Button>
-                <Button color="google plus">
-                  <Icon name="google" /> Google
-                </Button>
-              </div>
-            </CardHeader>
             <CardBody className="px-lg-5 py-lg-5">
               <div className="text-center text-muted mb-4">
-                <small>Or sign in with credentials</small>
+                <small>Sign in with credentials</small>
               </div>
               <Form onSubmit={e => onSubmit(e)} role="form">
                 <FormGroup className="mb-3">
@@ -131,7 +113,6 @@ const Login = ({ loginUser, auth, history }) => {
                     color="purple"
                     type="submit"
                     loading={loading}
-                    disabled={disabled()}
                   >
                     Sign in
                   </Button>
@@ -168,10 +149,12 @@ const Login = ({ loginUser, auth, history }) => {
   );
 };
 
+// export default Login;
+
 const mapStateToProps = state => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    async: state.async
   };
 };
-
 export default connect(mapStateToProps, { loginUser })(Login);

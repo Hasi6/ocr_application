@@ -11,6 +11,8 @@ import LoginRoute from './routes/auth/LoginRoute';
 import RegisterRoute from './routes/auth/RegisterRoute';
 import CheckAuthState from './routes/auth/AuthRoutes';
 import AddImage from './routes/tesseract/addImage';
+import cors from 'cors';
+
 
 
 
@@ -34,6 +36,7 @@ app.use(
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 // passport
 passportService(passport);
