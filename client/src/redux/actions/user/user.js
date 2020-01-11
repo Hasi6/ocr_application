@@ -1,5 +1,4 @@
-import { config, endPoint } from "../../../config";
-import axios from "axios";
+import { config } from "../../../config";
 import { GET_USER, DESTROY_USER } from "../../Types";
 
 // GET USER

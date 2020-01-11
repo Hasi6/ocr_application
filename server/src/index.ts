@@ -11,6 +11,7 @@ import LoginRoute from './routes/auth/LoginRoute';
 import RegisterRoute from './routes/auth/RegisterRoute';
 import CheckAuthState from './routes/auth/AuthRoutes';
 import AddImage from './routes/tesseract/addImage';
+import VerifyEmail from './routes/auth/verifyAccount';
 import cors from 'cors';
 
 
@@ -65,6 +66,7 @@ app.listen(PORT, () => {
 app.use(LoginRoute);
 app.use(RegisterRoute);
 app.use(CheckAuthState);
+app.use(VerifyEmail);
 
 // POST
 app.use(AddImage)

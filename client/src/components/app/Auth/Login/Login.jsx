@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button, Icon } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 import {
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -21,7 +20,6 @@ import {
 
 import "../auth.css";
 import { loginUser } from "../../../../redux/actions/auth/auth";
-import Axios from "axios";
 
 const Login = ({async, auth, loginUser, history}) => {
   if (auth) {

@@ -13,7 +13,5 @@ router.get('/api/verifyAccount/:token', async (req: Request, res: Response) => {
     } catch (err) {
         console.error(err.message)
     }
-
-
 })
 export default router

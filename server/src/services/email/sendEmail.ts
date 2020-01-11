@@ -15,6 +15,7 @@ class Email {
             from: "devconnectorvue@outlook.com",
             to: email,
             subject: "Welcome",
+            
             html: output,
 
             onError: (e: any) => console.log(e),
