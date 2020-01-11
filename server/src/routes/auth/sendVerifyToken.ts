@@ -12,7 +12,7 @@ router.post("/api/sendToken", async (req, res) => {
   const { email } = req.body;
 
   try {
-    const user = await findUser.findUserByEmail(email);
+    const user: any = await findUser.findUserByEmail(email);
 
     if (!user) {
       return res.json({ send: false });

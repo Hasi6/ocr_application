@@ -8,7 +8,7 @@ class SaveUserDB {
     async saveUser(userData: any) {
         const { username, email, password, image, token } = userData;
         try {
-            let newUser = new User({
+            let newUser: any = new User({
                 username,
                 email,
                 password,
