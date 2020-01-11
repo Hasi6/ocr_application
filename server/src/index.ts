@@ -25,6 +25,11 @@ import passportService from './services/passport/passport';
 const app = express();
 const { cookieSecret }: any = databaseData;
 
+// INIT MIDDLEWARE BODY PARSER
+app.use(
+    express.json()
+);
+
 // start Session
 app.use(
     cookieSession({
@@ -38,6 +43,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors());
 
+
 // passport
 passportService(passport);
 
@@ -45,10 +51,7 @@ passportService(passport);
 // DATABASE CONNECTION
 connectDB();
 
-// INIT MIDDLEWARE BODY PARSER
-app.use(
-    express.json()
-);
+
 
 app.use(express.static("public"));
 
