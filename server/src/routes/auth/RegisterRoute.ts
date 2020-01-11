@@ -12,6 +12,7 @@ const saveUserDB: SaveUserDB = new SaveUserDB();
 
 router.post("/api/register", async (req: Request, res: Response) => {
   const { username, email, password, image } = req.body;
+  console.log(req.body)
 
   const verifyAccount: VerifyAccount = new VerifyAccount();
 
