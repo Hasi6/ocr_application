@@ -20,7 +20,7 @@ const Verify = ({match})=>{
 
 
     return(
-        <h1>{verified?"verified successfuly":"loadding...."}</h1>
+        <h1>{verified?"verified successfuly":"verifing...."}</h1>
     )
 }
 

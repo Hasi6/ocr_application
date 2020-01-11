@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Icon, Loader } from 'semantic-ui-react';
 import Axios from 'axios';
+import { connect } from 'react-redux';
 
-const HomePage = () => {
+const HomePage = ({history,auth}) => {
+  if(!auth){
+    history.push("/login");
+  }
+
 
   const [image,setImage]=useState(null);
   const [imagePath,setImagePath]=useState(null);
@@ -67,4 +72,10 @@ const HomePage = () => {
   );
 }
 
-export default HomePage;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    async: state.async
+  };
+};
+export default connect(mapStateToProps, null)(HomePage);
