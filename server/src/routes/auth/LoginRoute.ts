@@ -12,7 +12,7 @@ router.post("/api/login", async (req: Request, res: Response, next: NextFunction
   const { email, password } = req.body;
 
   try {
-    const user = await findUser.findUserByEmail(email);
+    const user: any = await findUser.findUserByEmail(email);
 
     if (!user) {
       return res.json({ msg: "No User" });

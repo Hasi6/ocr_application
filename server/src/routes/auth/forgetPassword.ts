@@ -10,7 +10,7 @@ router.post("/api/forgetPassword", async (req: Request, res: Response) => {
   const findUser = new FindUser();
 
   try {
-    const user = await findUser.findUserByEmail(email);
+    const user: any = await findUser.findUserByEmail(email);
 
     if (!user) {
       return res.json({ msg: false });

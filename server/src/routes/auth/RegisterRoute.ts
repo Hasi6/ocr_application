@@ -37,10 +37,9 @@ router.post("/api/register", async (req: Request, res: Response) => {
     // SEND EMAIL
     const output = `<ul>
                       <li>User Token = Welcome ${username}</li>
-                      <p><a href='http://localhost:8080/verify/${token}'>click here</a> for verify your account  </p>
+                      <p><a href='http://localhost:3000/verify/${token}'>click here</a> for verify your account  </p>
                   </ul>`;
-    const response = await verifyAccount.verifyAccountSendEmail(email, output)
-
+    await verifyAccount.verifyAccountSendEmail(email, output)
     return res.json({ msg: "user registered successfully" });
   } catch (err) {
     console.error(err.message);

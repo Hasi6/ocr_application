@@ -29,7 +29,7 @@ class FindUser {
     // FIND USER BY TOKEN AND RESET PASSWORD
     async findUserByTokenAndResetPassword(token: String, password: any) {
         try {
-            const user = await Users.findOne({ token })
+            const user: any = await Users.findOne({ token })
             if (!user) {
                 return false;
             } else {
@@ -50,7 +50,7 @@ class FindUser {
     // FIND USER BY TOKEN AND VERIFY ACCOUNT
     async findUserByTokenAndVerifyAccount(token: String) {
         try {
-            const user = await Users.findOne({ token })
+            const user: any = await Users.findOne({ token })
             if (!user) {
                 return false
             }
