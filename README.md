@@ -10,7 +10,7 @@
   <tr>
     <td>Udith Shalinda</td>
     <td>udith-shalinda</td>
-    <td>SE/2016/047</td>
+    <td>SE/2016/47</td>
   </tr>
   <tr>
     <td>Hasitha Chandula</td>
@@ -27,7 +27,7 @@
 Our App Containes One Web App (Client) and 2 Backends(server & spring_boot_server ) and two mobile app (flutter_app and react_native)
 Main Apps Are Client, Server and Flutter_app Other apps we build because we want to do this assignment by using many frameworks.
 
-# We didn't remove other project because we need to show our commit history
+We didn't remove other projects or create a new repository because we need to show our commit history.
 
 To test Web app first go to the client folder and open terminal type and enter <h1>npm i --save</h1> after dependencies install you can start app by type npm start.
 
